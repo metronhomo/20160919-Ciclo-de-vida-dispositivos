@@ -1,10 +1,10 @@
-devtools::install_github("metronhomo/brostatistics2")
-library(brostatistics2)
+devtools::install_github("metronhomo/brostatistics")
+library(brostatistics)
 # ≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤
 
 # Leo los datos
 
-datos <- brostatistics2::gaseosa(
+datos <- brostatistics::gaseosa(
   xfile = list.files("./datos",full.names = T)[1], 
   yfile = list.files("./datos",full.names = T)[2]
   )
@@ -16,32 +16,23 @@ datos <- brostatistics2::gaseosa(
 ##########################################################################################
 # Saco variable "total
 datos$Total <- factor(1,levels = 1,labels = "Total")
-<-0
-
-
-datos[is.na(datos$P15_B_CELULAR_Hablar_por_tel_fono),"P15_B_CELULAR_Hablar_por_tel_fono"]<-0
 
 
 ##########################################################################################
 
 # Reporte
 
-frecuentator(fTtabla = datos,fTvariables = nombresR(datos, "15_B_CELULAR"),fTlevels = F)
 
-frecuentator
 
-nombresR(datos,"P15_C")
+bandera<- c("Total","P15_Celular","P15_Tablet___Ipad","P15_Computadora__Lap_Top",
+"P15_1_Celular","P15_1_Tablet___Ipad","P15_1_Computadora__Lap_Top",
+"F1Genero","NSE","Edad_Rango","Plaza")
+
+datos$P15_Celular
+
+resultados <- list(
+    genero = frecuentator(fTtabla = datos,fTvariables = 'F1Genero',fTlevels = T,fbanner = bandera),
+    nse = frecuentator(fTtabla = datos,fTvariables = 'NSE',fTlevels = T,fbanner = bandera)
 )
-table(datos$P15_B_CELULAR_OTRO)
-table(datos$P15_B_TABLET_OTRO)
-table(datos$P15_B_COMPU_OTRO)
 
-table(datos$P15_C_CELULAR_OTRO)
-table(datos$P15_C_TABLET_OTRO)
-table(datos$P15_C_COMPU_OTRO)
-
-nombresR(datos,"P16")
-
-table(datos$P16_CELULAR_OTRO)
-table(datos$P16_TABLETA_Otro__Especificar)
-
+exportator(resultados,"resultados.csv")

@@ -1,10 +1,13 @@
-devtools::install_github("metronhomo/brostatistics2")
-library(brostatistics2)
+devtools::install_github("metronhomo/brostatistics")
+library(brostatistics)
+install.packages("readxl")
+library(readxl)
 # ≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤
 
 # Leo los datos
 
-datos <- brostatistics2::gaseosa(
+
+datos <- brostatistics::gaseosa(
   xfile = list.files("./datos",full.names = T)[1], 
   yfile = list.files("./datos",full.names = T)[2]
   )
